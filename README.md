@@ -7,6 +7,7 @@
 * Bootstrap
 * Scss : vars, mixins, partial file for query
 * JavaScript : dom, bom
+* JQuery : effects
 * Scalable Design
 
 ### Color Scheme
