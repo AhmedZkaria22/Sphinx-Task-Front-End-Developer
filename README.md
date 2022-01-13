@@ -4,6 +4,7 @@
 ### Technologies
 * Html
 * Css
+* Bootstrap
 * Scss : vars, mixins, partial file for query
 * JavaScript : dom, bom
 
