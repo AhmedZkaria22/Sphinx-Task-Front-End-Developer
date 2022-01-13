@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="./Css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./Css/Style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script src="./Js/html5shiv.min.js"></script>
+        <script src="./Js/jquery-3.4.1.min.js"></script>
+        <script src="./Js/bootstrap.min.js"></script>
+        <script src="./Js/popper.min.js"></script>        
+        <script src="./Js/Script.js"></script>
+        <script>
+            const handelTSpns = (event) => {
+                const btnListener = event.target;
+                let btnSibListener = event.target.nextElementSibling;
+                if( event.target.nextElementSibling !== null && event.target.nextElementSibling.firstElementChild.classList.contains("fm") ){ btnSibListener = event.target.nextElementSibling; }
+                if( event.target.previousElementSibling !== null && event.target.previousElementSibling.firstElementChild.classList.contains("fm") ){ btnSibListener = event.target.previousElementSibling; }
+                document.getElementById("trueSound").pause();
+                document.getElementById("trueSound").play();
+                btnListener.setAttribute("disabled","");
+                $(btnListener.firstElementChild).fadeIn(300);                        
+                btnSibListener.setAttribute("disabled",""); 
+                btnSibListener.style.opacity = '0.7';
+            };
+
+            const handelFSpns = (event) => {
+                const btnListener = event.target;
+                document.getElementById("falseSound").pause();
+                document.getElementById("falseSound").play();
+                btnListener.firstElementChild.style.display = "block";
+                // add animation
+                $(btnListener.firstElementChild).fadeOut(300);
+            };
+        </script>        
+    </head>
+
+    <body>
+        <audio id="trueSound" src="./Sound/True.mp3" preload="auto"></audio>        
+        <audio id="falseSound" src="./Sound/Wrong.mp3" preload="auto"></audio>
+
+    <main>
+        <div id="carouselHead">
+            <p>Circle, choose and write.</p>
+            <div class="carouselHead-btns">
+                <button></button><button></button>
+            </div>            
+        </div>
+
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./Images/1.png" alt="" class="img-fluid">
+                    <div>
+                        <p class="text-center">
+                            What's<button onClick="handelTSpns(event)">this <span class="tm"></span> 
+                            </button onclick="handelFSpns(event)">/<button>that <span class="fm"></span>
+                            </button>?</p>
+                        <p class="text-center"><button onClick="handelTSpns(event)">It's <span class="tm"></span>
+                            </button>/<button onclick="handelFSpns(event)">Thay're <span class="fm"></span>
+                            </button>an orange school bag.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="./Images/2.png" alt="" class="img-fluid">
+                    <div>
+                        <p class="text-center">
+                            What are<button onclick="handelFSpns(event)">these <span class="fm"></span>
+                            </button>/<button onclick="handelTSpns(event)">those <span class="tm"></span>
+                            </button>?</p>
+                        <p class="text-center"><button onclick="handelFSpns(event)">It's <span class="fm"></span>
+                            </button>/<button onclick="handelTSpns(event)">Thay're <span class="tm"></span>
+                            </button>green pens.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="./Images/3.png" alt="" class="img-fluid">
+                    <div>
+                        <p class="text-center">
+                            What's<button onclick="handelTSpns(event)">this <span class="tm"></span>
+                            </button>/<button onclick="handelFSpns(event)">that <span class="fm"></span>
+                            </button>?</p>
+                        <p class="text-center">
+                            <button onclick="handelTSpns(event)">It's <span class="tm"></span>
+                            </button>/<button onclick="handelFSpns(event)">Thay're <span class="fm"></span>
+                            </button>a blue calculator.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="./Images/4.png" alt="" class="img-fluid">
+                    <div>
+                        <p class="text-center">
+                            What are<button onclick="handelFSpns(event)">these <span class="fm"></span>
+                            </button>/<button onclick="handelTSpns(event)">those <span class="tm"></span>
+                            </button>?</p> 
+                        <p class="text-center"><button onclick="handelFSpns(event)">It's <span class="fm"></span>
+                            </button>/<button onclick="handelTSpns(event)">Thay're <span class="tm"></span>
+                            </button>yellow compasses.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carouselControlls">
+                <button type="button" class="carouselControlls__replayBtn"></button>
+                <div class="fr">
+                    <button type="button" class="carouselControlls__reloadBtn"></button>
+                    <button type="button" class="carouselControlls__showAnsBtn"></button>
+                    <a class="carouselControlls__prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    </a>
+                    <button class="carouselControlls__prev-support"></button>
+                    <p class="carouselItemCounter"></p>
+                    <a class="carouselControlls__next" href="#carouselExampleControls" role="button" data-slide="next">
+                    </a>
+                    <button class="carouselControlls__next-support"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="help-item">
+            <p>Help content goes here.</p>
+            <button></button>
+        </div>
+        <div class="dummy-item"><button></button></div>
+
+        <div class="preLoader">
+            <div class="preLoader__grid">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        
+    </main>
+        
+    </body>
+</html>

@@ -1,0 +1,322 @@
+// Palette : #f5f5f5, white, #3498db, #333, #0fa0c5, #f5821f, #deecf6
+$color1: white;
+$color2: #f5f5f5;
+$color3: #deecf6;
+$color4: #3498db;
+$color5: #0fa0c5;
+$color6: #f5821f;
+$color7: #333;
+
+*{
+    margin: 0;      padding: 0;     
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+}
+
+@mixin controllButton($width, $height, $marginLeft, $borderRadius, $backImage){
+    border: none;
+    border-radius: $borderRadius;
+    width: $width; height: $height;
+    margin-left: $marginLeft;
+    background: {
+        size: 100% 100%;
+        position: center;
+        repeat: no-repeat;        
+        image: url($backImage); 
+    };
+}    
+
+@mixin preLoadKeyFrames($name, $xd, $yd){
+    @keyframes #{$name}{
+        0%{ #{$yd}: 0em;   #{$xd}: 0em; }
+        50%{ #{$yd}: -1em;   #{$xd}: -1em;  transform: rotate(-270deg); }
+        100%{ transform: rotate(-270deg);  #{$yd}: 0em;   #{$xd}: 0em; }
+    }
+}
+
+
+html{
+    position: relative;
+}
+
+.preLoader{
+    position: relative;
+    position: fixed; top: 0; left: 0; z-index: 99999; 
+    width: 100%;  height: 100%;
+
+    .preLoader__grid {     
+        width: 50px;
+        height: 50px;
+        margin: 18% auto;  transform: rotate(45deg);
+        position: relative;
+        div{
+            // background-color: $color2;
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            background-color: $color4;
+            
+            &:nth-child(1){ animation: animate_1 2s ease-in-out infinite; }
+            &:nth-child(2){ animation:animate_2 2s ease-in-out infinite;  }
+            &:nth-child(3){ animation: animate_3 2s ease-in-out infinite; }
+            &:nth-child(4){ animation: animate_4 2s ease-in-out infinite; }
+        }
+    }
+}
+
+@include preLoadKeyFrames('animate_1', left, top);
+@include preLoadKeyFrames('animate_2', right, top);
+@include preLoadKeyFrames('animate_3', left, bottom);
+@include preLoadKeyFrames('animate_4', right, bottom);
+
+@import 'Query';
+
+main{
+    margin: auto;
+    user-select: none;
+    resize: both;
+    transform-origin: top center;
+    width: 57.5vw;
+    height: 100vh;
+    transition: all 0.3s linear !important;
+
+    .help-item, .dummy-item{ 
+        display: none;  
+        align-items: flex-start;
+        padding: 0.5rem 0.4rem 0rem 1.35rem;
+        position: absolute;    
+        top: 13%;
+        width: 57.5vw;
+        left: calc((100vw - 57.5vw) / 2);
+        height: calc(75.5% + 0px);
+        // border: 2.5px solid #f5821f;
+        border: 2.5px solid $color6;
+        border-radius: 0.5em;
+        z-index: 11;
+        button{
+            width: 1.8rem;
+            height: 1.65rem;
+            border: none;
+            border-radius: 50%;
+            background: {
+                size: 100% 100%;
+                position: center;
+                repeat: no-repeat;        
+                image: url('../Images/close_icon.png');
+            };        
+        }
+    }
+
+    .help-item{ 
+        justify-content: space-between;            
+        background-color: $color1;
+        color: $color7;
+    }
+    .dummy-item{
+        justify-content: flex-end;
+        background: {
+            size: 100% 100%;
+            position: center;
+            repeat: no-repeat;        
+            image: url('../Images/dummy.jpg');
+        };        
+    }
+
+}
+
+.helpOverlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 9;
+    background-color: $color1;
+}
+
+
+#carouselHead{
+    height: 15%;
+    width: 100%;
+    padding: 2% 3%;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+
+    p{ 
+        font-size: 1.2rem;
+        margin-bottom: 0;  float: left; 
+        width: 80%;        
+    }
+
+    .carouselHead-btns{
+        width: 20%;     height: 100%;
+        display: flex;   align-items: center;   justify-content: flex-start;
+        flex-direction: row-reverse;
+        button{
+            &:first-of-type{ 
+                @include controllButton(35%, 80%, 8%, 18%, '../Images/help_icon.png');
+            }
+            &:last-of-type{ 
+                @include controllButton(35%, 80%, 0%, 18%, '../Images/resourse_icon.png');
+            }
+        }    
+    }
+}
+
+#carouselExampleControls{
+    margin: auto;
+    width: 100%;
+    height: 85%;
+    position: relative;
+    display: none;
+    
+    &::before{
+        content: "";
+        width: 100%;
+        height: 85%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: $color5;
+    }
+
+    .carousel-inner{
+        margin: auto;
+        border: 2.5px solid $color6;
+        border-radius: 0.5em;
+        position: absolute;
+        bottom: 13%;
+        right: 0;
+        left: 0;
+        background-color: $color1;
+        z-index: 9;
+        height: 89%;
+        width: calc(100% - 2.2vw);
+    
+        .carousel-item{
+            width: 100%;    height: 100%;   
+            position: relative;
+            color: $color7;
+            img{ 
+                width: calc(100% - 23vw);
+                margin-inline: 11.5vw;
+                margin-top: 6.0%;
+                height: 51%;
+            }
+            div{
+                width: 100%;
+                height: 30%;
+                position: absolute;
+                top: 60%;
+                left: 0;
+                p{
+                    font-size: 1.3rem;
+                    font-weight: 500;
+                    letter-spacing: 0.02vw;
+                    width: 100%;
+                    margin-bottom: 0;
+                    &:first-of-type{ margin-bottom: 2%; top: 60% }
+                    &:last-of-type{ margin-bottom: 0vh; top: 75% }
+                    button{
+                        display: inline-block;
+                        background-color: $color5;
+                        color: $color1;
+                        border: none;
+                        position: relative;
+                        font-weight: 500;
+                        padding: 0% 0.7%;
+                        margin-inline: 0.8%;
+                        border-radius: 14%;
+                        span{
+                            display: none;
+                            position: absolute;
+                            bottom: 100%;   right: -0.5rem;                                
+                            width: 1.3rem;   height: 1.3rem;
+                            background: {
+                                size: 100% 100%;
+                                position: center;
+                                repeat: no-repeat;
+                            };                            
+                            &.tm{ background-image: url('../Images/tikMark.png'); }
+                            &.fm{ background-image: url('../Images/falseMark.jpg'); }
+                        }
+                    }
+                }    
+            }
+        }
+    }
+
+    .carouselControlls{
+        height: 15%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2.7% 2% 1%;
+        background-color: $color3;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        overflow: hidden;
+        
+        .fr{ 
+            width: 90%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100%;
+            
+            &>a{
+                text-decoration: none;    
+                background-color: transparent;
+                &:first-of-type{ 
+                    @include controllButton(8%, 100%, 3%, 18%, '../Images/back.png');
+                }
+                &:last-of-type{ 
+                    @include controllButton(8%, 100%, 3%, 18%, '../Images/next.png');
+                }
+            }
+        }
+
+        button{
+            &.carouselControlls__replayBtn{ 
+                @include controllButton(7%, 100%, 0%, 18%, '../Images/replay.png');
+            }
+            &.carouselControlls__reloadBtn{ 
+                @include controllButton(8%, 100%, 3%, 18%, '../Images/reload.png');
+            }
+            &.carouselControlls__showAnsBtn{ 
+                @include controllButton(10%, 100%, 3%, 18%, '../Images/showAns.png');
+            }
+
+        }
+
+        .carouselControlls__next-support, .carouselControlls__prev-support{
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            display: none;
+        }
+        
+        .carouselControlls__prev-support{ @include controllButton(8%, 100%, 3%, 18%, '../Images/back.png'); }
+        .carouselControlls__next-support{ @include controllButton(8%, 100%, 3%, 18%, '../Images/next.png'); }
+
+        .carouselItemCounter{ 
+            height: 100%;
+            background-color: $color1;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid $color5;
+            font-size: 0.9rem;
+            font-weight: 500;
+            width: 12%;
+            border-radius: 16%;
+            margin-left: 3%;
+        }
+    }
+}
