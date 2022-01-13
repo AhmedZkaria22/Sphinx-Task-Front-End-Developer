@@ -7,6 +7,7 @@
 * Bootstrap
 * Scss : vars, mixins, partial file for query
 * JavaScript : dom, bom
+* Scalable Design
 
 ### Color Scheme
 <p> scss color vars from task design</p>
